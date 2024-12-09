@@ -115,10 +115,17 @@
       }}
     </div>
   {%- endif -%}
+  
   <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
+  
+    <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} ">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
+          {%- when 'pre_heading' -%}
+            <div class="banner__pre-heading rte {{ block.settings.pre_heading_style }}" {{ block.shopify_attributes }}>
+              <p>{{ block.settings.pre_heading }}</p>
+            </div>
+            
           {%- when 'heading' -%}
             <h2
               class="banner__heading inline-richtext {{ block.settings.heading_size }}"
@@ -160,9 +167,36 @@
                 </a>
               {%- endif -%}
             </div>
+          {%- when 'products' -%}
+            <div class="banner__products">
+              <div class="product-grid">
+                {%- for product in block.settings.products -%}
+                  <div class="product-card">
+                    <a href="{{ product.url }}">
+                      <div class="product-card__image">
+                        <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+                      </div>
+                      <div class="product-card__info">
+                        <h3 class="product-card__title">{{ product.title }}</h3>
+                        <div class="product-card__price">
+                          {% if product.compare_at_price > product.price %}
+                            <span class="price-item price-item--sale">{{ product.price | money }}</span>
+                            <span class="price-item price-item--regular">{{ product.compare_at_price | money }}</span>
+                          {% else %}
+                            <span class="price-item">{{ product.price | money }}</span>
+                          {% endif %}
+                        </div>
+                        <button class="button button--primary">{{ block.settings.button_label | default: 'Shop Now' }}</button>
+                      </div>
+                    </a>
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
         {%- endcase -%}
       {%- endfor -%}
     </div>
+    
   </div>
 </div>
 
@@ -363,6 +397,39 @@
   ],
   "blocks": [
     {
+      "type": "pre_heading",
+      "name": "t:sections.image-banner.blocks.pre_heading.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "pre_heading",
+          "default": "New Arrival",
+          "label": "t:sections.image-banner.blocks.pre_heading.settings.pre_heading.label"
+        },
+        {
+          "type": "select",
+          "id": "pre_heading_style",
+          "options": [
+            {
+              "value": "body",
+              "label": "t:sections.image-banner.blocks.pre_heading.settings.pre_heading_style.options__1.label"
+            },
+            {
+              "value": "subtitle",
+              "label": "t:sections.image-banner.blocks.pre_heading.settings.pre_heading_style.options__2.label"
+            },
+            {
+              "value": "caption-with-letter-spacing",
+              "label": "t:sections.image-banner.blocks.pre_heading.settings.pre_heading_style.options__3.label"
+            }
+          ],
+          "default": "body",
+          "label": "t:sections.image-banner.blocks.pre_heading.settings.pre_heading_style.label"
+        }
+      ]
+    },
+    {
       "type": "heading",
       "name": "t:sections.image-banner.blocks.heading.name",
       "limit": 1,
@@ -484,6 +551,13 @@
     {
       "name": "t:sections.image-banner.presets.name",
       "blocks": [
+        {
+          "type": "pre_heading",
+          "settings": {
+            "pre_heading": "New Arrival",
+            "pre_heading_style": "body"
+          }
+        },
         {
           "type": "heading"
         },

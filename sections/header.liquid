@@ -132,7 +132,7 @@
 
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
+        <span class="header__heading">
       {%- endif -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
             {%- if settings.logo != blank -%}
@@ -156,7 +156,7 @@
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}
-        </h1>
+        </span>
       {%- endif -%}
     {%- endif -%}
 
@@ -172,7 +172,7 @@
 
     {%- if section.settings.logo_position == 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
+        <span class="header__heading">
       {%- endif -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
             {%- if settings.logo != blank -%}
@@ -196,7 +196,7 @@
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}
-        </h1>
+        </span>
       {%- endif -%}
     {%- endif -%}
 
@@ -224,7 +224,6 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
 
       {%- if shop.customer_accounts_enabled -%}
         <a
@@ -237,11 +236,11 @@
               {%- if customer and customer.has_avatar? -%}
                 {{ customer | avatar }}
               {%- else -%}
-                <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+                <span class="svg-wrapper">{{ 'icon-account-1.svg' | inline_asset_content }}</span>
               {%- endif -%}
             </account-icon>
           {%- else -%}
-            <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+            <span class="svg-wrapper">{{ 'icon-account-1.svg' | inline_asset_content }}</span>
           {%- endif -%}
           <span class="visually-hidden">
             {%- liquid
@@ -255,19 +254,15 @@
         </a>
       {%- endif -%}
 
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when '@app' -%}
-            {% render block %}
-        {%- endcase -%}
-      {%- endfor -%}
+      {% render 'header-search', input_id: 'Search-In-Modal' %}
+
+      <a href="/tools/wishlist" class="header__icon header__icon--wishlist link focus-inset" id="wishlist-icon">
+        <span class="svg-wrapper">{{ 'icon-wishlist.svg' | inline_asset_content }}</span>
+        <span class="visually-hidden">{{ 'sections.header.wishlist' | t }}</span>
+      </a>
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
-          {% if cart == empty %}
-            <span class="svg-wrapper">{{'icon-cart-empty.svg' | inline_asset_content }}</span>
-          {% else %}
-            <span class="svg-wrapper">{{'icon-cart.svg' | inline_asset_content }}</span>
-          {% endif %}
+        <span class="svg-wrapper">{{ 'icon-cart-1.svg' | inline_asset_content }}</span>
         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
         {%- if cart != empty -%}
           <div class="cart-count-bubble">

@@ -57,6 +57,17 @@
     class="product__modal-opener product__modal-opener--{{ media.media_type }}"
     data-modal="#ProductModal-{{ modal_id }}"
   >
+    <div class="product__media-overlay">
+      <button class="button">
+        Add to cart
+      </button>
+      <div class="social-buttons">
+        <button class="social-button">Share</button>
+        <button class="social-button">Compare</button>
+        <button class="social-button">Like</button>
+      </div>
+    </div>
+    
     <span
       class="product__media-icon motion-reduce quick-add-hidden{% if media.media_type == 'image' %} product__media-icon--{{ section.settings.image_zoom }}{% endif %}"
       aria-hidden="true"

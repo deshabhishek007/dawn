@@ -2351,7 +2351,8 @@ input[type='checkbox'] {
 }
 
 .header {
-  display: grid;
+  display: flex;
+  justify-content: space-between;
   grid-template-areas: 'left-icons heading icons';
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
@@ -2532,8 +2533,8 @@ input[type='checkbox'] {
 }
 
 .header__icon .svg-wrapper {
-  width: 44px;
-  height: 44px;
+  width: 22px; /* Reduced from 44px */
+  height: 22px; /* Reduced from 44px */
 }
 
 .header__icon::after {
@@ -2554,14 +2555,25 @@ input[type='checkbox'] {
 
 .header__icon,
 .header__icon--cart .icon {
-  height: 4.4rem;
-  width: 4.4rem;
+  height: 2.2rem; /* Reduced from 4.4rem */
+  width: 2.2rem; /* Reduced from 4.4rem */
   padding: 0;
 }
 
+/* Add spacing between icons */
+.header__icon:not(:last-child) {
+  margin-right: 3rem; /* Add consistent spacing between icons */
+}
+
+/* Remove existing cart margin */
 .header__icon--cart {
   position: relative;
-  margin-right: -1.2rem;
+  margin-right: 0; /* Changed from -1.2rem */
+}
+
+/* Adjust account avatar size if needed */
+.header__icon--account shop-user-avatar {
+  --shop-avatar-size: 2.2rem; /* Reduced from 2.8rem */
 }
 
 .header__icon--menu[aria-expanded='true']::before {
@@ -2573,10 +2585,6 @@ input[type='checkbox'] {
   display: block;
   position: absolute;
   background: rgba(var(--color-foreground), 0.5);
-}
-
-.header__icon--account shop-user-avatar {
-  --shop-avatar-size: 2.8rem;
 }
 
 details .header__icon-close {
@@ -2795,6 +2803,8 @@ details[open] > .header__submenu {
   padding: 1.2rem;
   text-decoration: none;
   color: rgba(var(--color-foreground), 0.75);
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .header__menu-item:hover {
@@ -2806,12 +2816,12 @@ details[open] > .header__submenu {
 }
 
 .header__menu-item:hover span {
-  text-decoration: underline;
+  text-decoration: none;
   text-underline-offset: 0.3rem;
 }
 
 details[open] > .header__menu-item {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 details[open]:hover > .header__menu-item {
@@ -2825,7 +2835,7 @@ details[open] > .header__menu-item .icon-caret {
 .header__active-menu-item {
   transition: text-decoration-thickness var(--duration-short) ease;
   color: rgb(var(--color-foreground));
-  text-decoration: underline;
+  text-decoration: none;
   text-underline-offset: 0.3rem;
 }
 

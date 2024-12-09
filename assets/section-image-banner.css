@@ -7,7 +7,14 @@
 }
 
 .banner__box {
-  text-align: center;
+  
+  position: relative;
+  height: fit-content;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  word-wrap: break-word;
+  z-index: 1;
 }
 
 /* Needed for gradient continuity with or without animation, the transform scopes the gradient to its container which happens already when animation are turned on */
@@ -266,19 +273,25 @@
   }
 }
 
+
 .banner__content {
   padding: 0;
   display: flex;
   position: relative;
-  width: 100%;
+  
   align-items: center;
   justify-content: center;
   z-index: 2;
+  background: #9AA969;
+  position: absolute;
+  top: 75px;
+  right: 175px;
+  border-radius: 10px;
 }
 
 @media screen and (min-width: 750px) {
   .banner__content {
-    padding: 5rem;
+    padding: 3rem 1rem;
   }
 
   .banner__content--top-left {
@@ -336,21 +349,28 @@
   .banner--mobile-bottom:not(.banner--stacked) .banner__box.color-scheme-1 {
     background: transparent;
   }
+
+  .banner__content {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+  }
 }
 
 .banner__box {
-  padding: 4rem 1.5rem;
+  padding: 2rem ;
   position: relative;
   height: fit-content;
   align-items: center;
-  text-align: center;
+  text-align: left;
   width: 100%;
   word-wrap: break-word;
   z-index: 1;
+  background-color: #9AA969;
 }
 
 .banner--mobile-bottom .banner__box {
-  padding: 4rem 3.5rem;
+  padding: 2rem 3.5rem;
 }
 
 @media screen and (min-width: 750px) {
@@ -434,7 +454,12 @@
 }
 
 .banner__heading {
-  margin-bottom: 0;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 65px;
+  color: #FFFFFF;
 }
 
 .banner__box .banner__heading + * {
@@ -489,4 +514,42 @@
   .banner--desktop-transparent .rte a:hover {
     color: currentColor;
   }
+}
+
+.banner__pre-heading {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 3px;
+  color: #FFFFFF;
+}
+
+.banner__text {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #FFFFFF;
+
+}
+
+.banner__buttons .button {
+  padding: 25px;
+  
+  background: #283618;
+  opacity: 1;
+  font-size: 16px;;
+  color:#fff;
+  font-weight: 700;
+  line-height: 24px;
+  text-transform: uppercase;
+  
+
+}
+
+.banner__buttons {
+  display: flex;
+  gap: 10px;
 }
